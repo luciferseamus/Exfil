@@ -37,6 +37,12 @@ $o=New-Object -ComObject WScript.Shell
 Target-Comes
 
 
+# Turn of capslock if it is left on
+
+$caps = [System.Windows.Forms.Control]::IsKeyLocked('CapsLock')
+if ($caps -eq $true){$key = New-Object -ComObject WScript.Shell;$key.SendKeys('{CapsLock}')}
+
+
 $D="$env:tmp";
 cd $D\pass
 

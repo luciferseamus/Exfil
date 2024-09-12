@@ -24,7 +24,7 @@ $Date = Get-Date -Format yyyy-MM-dd;
 $Time = Get-Date -Format hh-mm-ss;
 dir env:;
 $env:computername | Out-File $FileName -Force;
-Add-Content -Path "$FileName" -Value "Computer Info";
+Add-Content -Path “$FileName” -Value "Computer Info";
 Get-LocalUser | Where-Object -Property PasswordRequired -Match false | Out-File $FileName -Append;
 Get-LocalUser | Out-File $FileName -Append;
 

